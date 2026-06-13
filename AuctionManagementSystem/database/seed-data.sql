@@ -1,0 +1,12 @@
+-- =============================================================================
+-- Nạp lại dữ liệu test
+-- =============================================================================
+-- Chạy TOÀN BỘ file schema.sql (sẽ xóa và tạo lại bảng + dữ liệu mẫu):
+--
+--   mysql -u root -p < database/schema.sql
+--
+-- Hoặc mở database/schema.sql trong MySQL Workbench / NetBeans và Execute.
+--
+-- Tài khoản test (mật khẩu: 123456):
+--   admin, manager, staff1, seller1, seller2, buyer1, buyer2
+-- =============================================================================
