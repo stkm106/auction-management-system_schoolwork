@@ -23,21 +23,48 @@ public class StaffController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("pendingPayments", paymentDAO.findAll("PENDING"));
-        model.addAttribute("pendingProducts", productDAO.findAll(null, null, "PENDING"));
-        model.addAttribute("activeAuctions", auctionDAO.findAll("ACTIVE", null, null));
+        model.addAttribute("pendingPaymentCount", paymentDAO.findAll("PENDING").size());
+        model.addAttribute("pendingProductCount", productDAO.findAll(null, null, "PENDING").size());
+        model.addAttribute("activeAuctionCount", auctionDAO.findAll("ACTIVE", null, null).size());
         return "staff/dashboard";
+    }
+
+    @GetMapping("/products")
+    public String products(@RequestParam(required = false) String keyword, Model model) {
+        model.addAttribute("products", productDAO.findAll(keyword, null, "PENDING"));
+        model.addAttribute("keyword", keyword);
+        return "staff/products";
+    }
+
+    @GetMapping("/auctions")
+    public String auctions(@RequestParam(required = false) String keyword, Model model) {
+        model.addAttribute("auctions", auctionDAO.findAll("ACTIVE", keyword, null));
+        model.addAttribute("keyword", keyword);
+        return "staff/auctions";
+    }
+
+    @GetMapping("/payments")
+    public String payments(Model model) {
+        model.addAttribute("payments", paymentDAO.findAll("PENDING"));
+        model.addAttribute("pendingCount", paymentDAO.findAll("PENDING").size());
+        return "staff/payments";
     }
 
     @PostMapping("/products/approve")
     public String approveProduct(@RequestParam int productId) {
         productDAO.updateStatus(productId, "APPROVED");
-        return "redirect:/staff/dashboard";
+        return "redirect:/staff/products";
+    }
+
+    @PostMapping("/products/reject")
+    public String rejectProduct(@RequestParam int productId) {
+        productDAO.updateStatus(productId, "REJECTED");
+        return "redirect:/staff/products";
     }
 
     @PostMapping("/auctions/end")
     public String endAuction(@RequestParam int auctionId) {
         auctionService.endAuction(auctionId);
-        return "redirect:/staff/dashboard";
+        return "redirect:/staff/auctions";
     }
 }

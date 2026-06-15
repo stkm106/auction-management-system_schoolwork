@@ -1,51 +1,81 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<c:set var="pageTitle" value="Bảng điều khiển quản lý"/>
-<%@ include file="../shared/header.jsp" %>
-<div class="container mt-4">
-    <h2>Bảng điều khiển quản lý</h2>
-    <p>Tổng doanh thu phí sàn: <strong><tags:formatVnd value="${revenue}"/></strong></p>
-    <a href="${pageContext.request.contextPath}/manager/reports" class="btn btn-primary mb-3">Xem báo cáo chi tiết</a>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h5>Doanh thu theo sản phẩm</h5>
-                <ul>
+<c:set var="panelTitle" value="Bảng điều khiển"/>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<%@ include file="../shared/manager-head.jsp" %>
+</head>
+<body>
+<div class="admin-wrap">
+    <%@ include file="../shared/manager-sidebar.jsp" %>
+    <div class="admin-main">
+        <h1 class="admin-page-title"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển quản lý</h1>
+        <p class="panel-intro">Giám sát vận hành đấu giá, theo dõi doanh thu phí sàn và tình hình phiên đang diễn ra.</p>
+
+        <div class="admin-stats">
+            <div class="admin-stat-card">
+                <i class="fa-solid fa-coins"></i>
+                <h2><tags:formatVnd value="${revenue}"/></h2>
+                <p>Phí sàn thu được</p>
+            </div>
+            <div class="admin-stat-card">
+                <i class="fa-solid fa-gavel"></i>
+                <h2>${totalAuctions}</h2>
+                <p>Tổng phiên đấu giá</p>
+            </div>
+            <div class="admin-stat-card">
+                <i class="fa-solid fa-clock"></i>
+                <h2>${activeAuctions}</h2>
+                <p>Đang diễn ra</p>
+            </div>
+            <div class="admin-stat-card">
+                <i class="fa-solid fa-credit-card"></i>
+                <h2>${pendingPayments}</h2>
+                <p>Thanh toán chờ</p>
+            </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+            <div class="admin-form-card">
+                <h3><i class="fa-solid fa-chart-column"></i> Doanh thu theo sản phẩm</h3>
+                <ul style="list-style:none;padding:0;margin:0">
                     <c:forEach var="s" items="${revenueStats}">
-                        <li>${s.label}: <tags:formatVnd value="${s.value}"/></li>
+                        <li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee;font-size:14px">
+                            <span>${s.label}</span>
+                            <strong style="color:var(--navy)"><tags:formatVnd value="${s.value}"/></strong>
+                        </li>
                     </c:forEach>
+                    <c:if test="${empty revenueStats}"><li class="table-empty">Chưa có dữ liệu</li></c:if>
                 </ul>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h5>Sản phẩm phổ biến</h5>
-                <ul>
+            <div class="admin-form-card">
+                <h3><i class="fa-solid fa-star"></i> Sản phẩm phổ biến</h3>
+                <ul style="list-style:none;padding:0;margin:0">
                     <c:forEach var="s" items="${popularProducts}">
-                        <li>${s.label}: ${s.count} lượt đặt giá</li>
+                        <li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee;font-size:14px">
+                            <span>${s.label}</span>
+                            <strong style="color:var(--gold)">${s.count} bid</strong>
+                        </li>
                     </c:forEach>
+                    <c:if test="${empty popularProducts}"><li class="table-empty">Chưa có dữ liệu</li></c:if>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="card p-3 mt-3">
-        <h5>Tất cả phiên đấu giá</h5>
-        <table class="table">
-            <thead><tr><th>Sản phẩm</th><th>Trạng thái</th><th>Giá hiện tại</th></tr></thead>
-            <tbody>
-            <c:forEach var="a" items="${auctions}">
-                <tr><td>${a.productName}</td><td>
-                    <c:choose>
-                        <c:when test="${a.status == 'ACTIVE'}">Đang diễn ra</c:when>
-                        <c:when test="${a.status == 'UPCOMING'}">Sắp diễn ra</c:when>
-                        <c:when test="${a.status == 'ENDED'}">Đã kết thúc</c:when>
-                        <c:otherwise>${a.status}</c:otherwise>
-                    </c:choose>
-                </td><td><tags:formatVnd value="${a.currentPrice}"/></td></tr>
-            </c:forEach>
-            </tbody>
-        </table>
+
+        <div class="admin-form-card" style="margin-top:24px">
+            <h3><i class="fa-solid fa-link"></i> Truy cập nhanh</h3>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+                <a href="${pageContext.request.contextPath}/manager/auctions" class="btn-sm btn-sm-gold" style="text-decoration:none">
+                    <i class="fa-solid fa-hammer"></i> Quản lý phiên & lịch
+                </a>
+                <a href="${pageContext.request.contextPath}/manager/reports" class="btn-sm btn-sm-navy" style="text-decoration:none">
+                    <i class="fa-solid fa-chart-pie"></i> Báo cáo chi tiết
+                </a>
+            </div>
+        </div>
     </div>
 </div>
-<%@ include file="../shared/footer.jsp" %>
+</body>
+</html>

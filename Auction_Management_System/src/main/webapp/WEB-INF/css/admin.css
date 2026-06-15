@@ -446,6 +446,99 @@
     letter-spacing: 0.02em;
 }
 
+.sidebar-role-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar a.active {
+    background: var(--navy-light);
+    color: var(--gold);
+}
+
+.panel-intro {
+    color: #64748b;
+    font-size: 14px;
+    margin: -12px 0 28px;
+    line-height: 1.6;
+}
+
+.panel-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.panel-summary-item {
+    background: linear-gradient(135deg, #f8fafc, #fff);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+.panel-summary-item strong {
+    display: block;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.panel-summary-item span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.table-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.table-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #f1f5f9;
+}
+
+.table-product-meta {
+    min-width: 0;
+}
+
+.table-product-meta strong {
+    display: block;
+    color: var(--navy);
+}
+
+.table-product-meta small {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.table-action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 200px;
+}
+
+.table-action-stack .btn-sm {
+    width: 100%;
+    justify-content: center;
+}
+
 /* Dashboard cards in admin */
 .admin-stats {
     display: grid;

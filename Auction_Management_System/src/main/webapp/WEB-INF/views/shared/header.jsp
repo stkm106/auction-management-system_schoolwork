@@ -25,16 +25,24 @@
         <a href="${pageContext.request.contextPath}/auctions">Đấu giá</a>
         <a href="${pageContext.request.contextPath}/categories">Danh mục</a>
         <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'ADMIN'}">
-            <a href="${pageContext.request.contextPath}/admin/reports">Báo cáo</a>
+            <a href="${pageContext.request.contextPath}/admin/dashboard">Quản trị</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'AUCTION_MANAGER'}">
+            <a href="${pageContext.request.contextPath}/manager/dashboard">Vận hành</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.user && sessionScope.user.role == 'STAFF'}">
+            <a href="${pageContext.request.contextPath}/staff/dashboard">Công việc</a>
         </c:if>
     </nav>
     <div class="header-btns">
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
-                <a href="${pageContext.request.contextPath}/wallet" class="btn btn-login" title="Ví"><i class="fa-solid fa-wallet"></i> Ví</a>
-                <a href="${pageContext.request.contextPath}/my-bids" class="btn btn-login" title="Lịch sử đặt giá">Lịch sử</a>
-                <a href="${pageContext.request.contextPath}/my-payments" class="btn btn-login" title="Thanh toán">Thanh toán</a>
-                <a href="${pageContext.request.contextPath}/seller/products" class="btn btn-login" title="Bán hàng">Bán</a>
+                <c:if test="${sessionScope.user.role == 'CUSTOMER'}">
+                    <a href="${pageContext.request.contextPath}/wallet" class="btn btn-login" title="Ví"><i class="fa-solid fa-wallet"></i> Ví</a>
+                    <a href="${pageContext.request.contextPath}/my-bids" class="btn btn-login" title="Lịch sử đặt giá">Lịch sử</a>
+                    <a href="${pageContext.request.contextPath}/my-payments" class="btn btn-login" title="Thanh toán">Thanh toán</a>
+                    <a href="${pageContext.request.contextPath}/seller/products" class="btn btn-login" title="Bán hàng">Bán</a>
+                </c:if>
                 <span class="btn btn-login header-user" title="${sessionScope.user.fullName}">${sessionScope.user.fullName}</span>
                 <a href="${pageContext.request.contextPath}/logout" class="btn btn-register">Đăng xuất</a>
             </c:when>

@@ -12,6 +12,7 @@ import uef.edu.vn.dao.UserDAO;
 import uef.edu.vn.model.User;
 import uef.edu.vn.service.EmailService;
 import uef.edu.vn.utils.RoleConstants;
+import uef.edu.vn.utils.RolePermissions;
 
 @Controller
 public class AuthController {
@@ -77,15 +78,6 @@ public class AuthController {
     }
 
     private String redirectByRole(String role) {
-        if (RoleConstants.ADMIN.equals(role)) {
-            return "redirect:/admin/dashboard";
-        }
-        if (RoleConstants.MANAGER.equals(role)) {
-            return "redirect:/manager/dashboard";
-        }
-        if (RoleConstants.STAFF.equals(role)) {
-            return "redirect:/staff/dashboard";
-        }
-        return "redirect:/home";
+        return "redirect:" + RolePermissions.getHomePath(role);
     }
 }
