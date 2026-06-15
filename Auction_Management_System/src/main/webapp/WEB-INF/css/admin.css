@@ -1,0 +1,602 @@
+/* Admin panel — unified layout & forms */
+.admin-wrap {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    align-items: flex-start;
+}
+
+.admin-wrap > .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-main,
+.admin-filter,
+.admin-form-card,
+.data-table,
+.form-control,
+.admin-select,
+.btn-sm {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Giữ Font Awesome — tránh Poppins ghi đè icon */
+.admin-wrap .fa-solid,
+.admin-wrap .fa-regular,
+.admin-wrap .fa-brands,
+.admin-wrap [class*="fa-"] {
+    font-family: "Font Awesome 6 Free" !important;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+}
+
+.admin-wrap .fa-brands {
+    font-family: "Font Awesome 6 Brands" !important;
+    font-weight: 400;
+}
+
+.admin-wrap .fa-regular {
+    font-weight: 400;
+}
+
+.admin-wrap .fa-solid,
+.admin-wrap .fas {
+    font-weight: 900;
+}
+
+.admin-page-title i {
+    color: var(--gold);
+    font-size: 24px;
+}
+
+.sidebar-logo i {
+    font-size: 26px;
+}
+
+.sidebar a i {
+    width: 20px;
+    font-size: 15px;
+    text-align: center;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+
+.admin-main {
+    font-size: 14px;
+    color: #334155;
+    min-height: 100vh;
+}
+
+.admin-page-title {
+    color: var(--navy);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Filter bar */
+.admin-filter {
+    background: #fff;
+    padding: 22px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(7, 23, 57, 0.06);
+}
+
+.admin-filter .form-group {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.admin-filter-compact {
+    width: 100%;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+
+.admin-filter .filter-search {
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+
+.admin-filter .filter-role {
+    flex: 0 0 220px;
+    width: 220px;
+}
+
+.admin-filter .btn-filter {
+    flex-shrink: 0;
+    height: 48px;
+    padding: 0 22px;
+    margin-bottom: 0;
+}
+
+.admin-filter .form-control,
+.admin-filter .admin-select {
+    height: 40px;
+}
+
+.admin-filter .form-label {
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: #64748b;
+}
+
+.admin-filter .btn-gold {
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Bảng admin — vừa màn hình */
+.admin-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.admin-main .data-table {
+    margin: 0;
+    min-width: 720px;
+}
+
+.table-users .col-id { width: 50px; }
+.table-users .col-user { width: 110px; }
+.table-users .col-name { width: 140px; }
+.table-users .col-email { width: auto; }
+.table-users .col-action { width: 280px; }
+
+.cell-email {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-empty {
+    text-align: center;
+    color: #999;
+    padding: 28px !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Form cập nhật trong bảng — gọn */
+.table-update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 270px;
+}
+
+.table-update-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.admin-select-sm {
+    width: 100%;
+    min-width: 0 !important;
+    height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+}
+
+.table-update-form .btn-save-row {
+    width: 100%;
+    height: 36px;
+    min-width: 0;
+    padding: 0 14px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.table-update-form .btn-save-row:hover {
+    background: #c4933f;
+}
+
+/* Table action forms — uniform height */
+.table-inline-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    padding: 4px 0;
+    max-width: 320px;
+}
+
+.table-inline-form .form-control,
+.table-inline-form select,
+.admin-select {
+    width: auto;
+    min-width: 130px;
+    max-width: 160px;
+    height: 40px;
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fafbfc;
+    cursor: pointer;
+}
+
+.table-inline-form .form-control:focus,
+.admin-select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212, 164, 75, 0.12);
+}
+
+.table-inline-form .btn-sm,
+.table-inline-form .btn-sm-gold,
+.table-inline-form .btn-sm-navy {
+    height: 40px;
+    min-width: 96px;
+    padding: 0 18px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.admin-form-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(7, 23, 57, 0.05);
+}
+
+.admin-form-card h3 {
+    color: var(--navy);
+    font-size: 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-form-card h3 i {
+    color: var(--gold);
+}
+
+.admin-form-inline {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 14px;
+    align-items: end;
+}
+
+/* Form thêm/sửa — 2 hàng: ô nhập + nút lưu xuống dưới */
+.admin-form-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-form-fields {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.admin-form-fields--with-btn {
+    grid-template-columns: minmax(220px, 320px) 1fr auto;
+    align-items: end;
+}
+
+.admin-form-btn-col {
+    flex-shrink: 0;
+}
+
+.admin-form-btn-col .btn-form-save {
+    white-space: nowrap;
+}
+
+.admin-form-stacked .form-group {
+    margin-bottom: 0;
+}
+
+.admin-form-stacked .form-control {
+    height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+}
+
+.admin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid #eef2f7;
+}
+
+.btn-form-save {
+    height: 42px;
+    padding: 0 28px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-form-save:hover {
+    background: #c4933f;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-sold {
+    background: #cce5ff;
+    color: #004085;
+}
+
+/* Data table in admin */
+.admin-main .data-table th {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.admin-main .data-table td {
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.admin-main .data-table td strong {
+    color: var(--navy);
+}
+
+/* Sidebar — font fix */
+.sidebar {
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidebar a {
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidebar-logo span {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+.sidebar-role-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar a.active {
+    background: var(--navy-light);
+    color: var(--gold);
+}
+
+.panel-intro {
+    color: #64748b;
+    font-size: 14px;
+    margin: -12px 0 28px;
+    line-height: 1.6;
+}
+
+.panel-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.panel-summary-item {
+    background: linear-gradient(135deg, #f8fafc, #fff);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+.panel-summary-item strong {
+    display: block;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.panel-summary-item span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.table-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.table-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #f1f5f9;
+}
+
+.table-product-meta {
+    min-width: 0;
+}
+
+.table-product-meta strong {
+    display: block;
+    color: var(--navy);
+}
+
+.table-product-meta small {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.table-action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 200px;
+}
+
+.table-action-stack .btn-sm {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Dashboard cards in admin */
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.admin-stat-card {
+    background: #fff;
+    color: var(--navy);
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.admin-stat-card i {
+    color: var(--gold);
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.admin-stat-card h2 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.admin-stat-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .admin-form-inline,
+    .admin-form-fields,
+    .admin-form-fields--with-btn {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-form-btn-col .btn-form-save {
+        width: 100%;
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-inline-form {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-wrap > .sidebar {
+        position: relative;
+        height: auto;
+        width: 100%;
+        overflow-y: visible;
+    }
+}
