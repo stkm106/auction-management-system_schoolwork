@@ -1,111 +1,104 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="pageTitle" value="Đăng ký"/>
-<c:set var="extraCss" value="auth"/>
-<%@ include file="../shared/header.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<div class="auth-page">
-    <div class="auth-card auth-card-wide">
-        <div class="auth-brand">
-            <div class="auth-brand-content">
-                <div class="brand-icon"><i class="fa-solid fa-user-plus"></i></div>
-                <h2>Tham gia <span>AuctionPro</span></h2>
-                <p>Tạo tài khoản miễn phí và bắt đầu mua bán qua đấu giá ngay hôm nay.</p>
-                <ul class="auth-features">
-                    <li><i class="fa-solid fa-check"></i> Tự động tạo ví điện tử</li>
-                    <li><i class="fa-solid fa-check"></i> Vừa mua vừa bán trên cùng tài khoản</li>
-                    <li><i class="fa-solid fa-check"></i> Đăng sản phẩm &amp; tham gia đấu giá</li>
-                </ul>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng ký - AuctionPro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="${ctx}/resources/css/style.css">
+</head>
+<body class="auth-page">
 
-        <div class="auth-form-side">
-            <h2><i class="fa-solid fa-user-plus"></i> Tạo tài khoản</h2>
-            <p class="auth-subtitle">Điền thông tin bên dưới để đăng ký</p>
+<jsp:include page="/WEB-INF/views/shared/header.jsp"/>
+
+<div class="auth-split">
+    <div class="auth-form-side">
+        <div class="auth-box auth-box-register">
+            <p class="auth-eyebrow mb-2">Tạo tài khoản mới</p>
+            <h2 class="auth-title mb-2">Đăng ký thành viên</h2>
+            <p class="auth-subtitle mb-4">Tham gia cộng đồng đấu giá và khám phá hàng ngàn sản phẩm độc đáo.</p>
 
             <c:if test="${not empty error}">
-                <div class="auth-alert auth-alert-danger">
-                    <i class="fa-solid fa-circle-exclamation"></i> ${error}
-                </div>
+                <div class="alert alert-danger py-2 mb-3">${error}</div>
             </c:if>
 
-            <form action="${pageContext.request.contextPath}/register" method="post">
-                <div class="form-row">
-                    <div class="input-wrap">
-                        <label class="form-label" for="username">Tên đăng nhập</label>
-                        <div class="input-field">
-                            <input class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-                            <i class="fa-solid fa-user input-icon"></i>
-                        </div>
-                    </div>
-                    <div class="input-wrap">
-                        <label class="form-label" for="fullName">Họ và tên</label>
-                        <div class="input-field">
-                            <input class="form-control" id="fullName" name="fullName" placeholder="Nguyễn Văn A">
-                            <i class="fa-solid fa-id-card input-icon"></i>
-                        </div>
+            <form method="post" action="${ctx}/register" class="auth-form">
+                <div class="auth-field">
+                    <label class="auth-label" for="username">Tên đăng nhập</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-person auth-input-icon"></i>
+                        <input type="text" id="username" name="username" class="form-control auth-input"
+                               placeholder="Nhập tên đăng nhập" autocomplete="username" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="input-wrap">
-                        <label class="form-label" for="phone">Số điện thoại</label>
-                        <div class="input-field">
-                            <input class="form-control" id="phone" name="phone" placeholder="0901234567">
-                            <i class="fa-solid fa-phone input-icon"></i>
-                        </div>
-                    </div>
-                    <div class="input-wrap">
-                        <label class="form-label" for="email">Email</label>
-                        <div class="input-field">
-                            <input class="form-control" id="email" type="email" name="email" placeholder="email@example.com" required>
-                            <i class="fa-solid fa-envelope input-icon"></i>
-                        </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="email">Email</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-envelope auth-input-icon"></i>
+                        <input type="email" id="email" name="email" class="form-control auth-input"
+                               placeholder="Nhập địa chỉ email" autocomplete="email" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="input-wrap">
-                        <label class="form-label" for="password">Mật khẩu</label>
-                        <div class="input-field">
-                            <input class="form-control" id="password" type="password" name="password" placeholder="Tối thiểu 6 ký tự" required>
-                            <i class="fa-solid fa-lock input-icon"></i>
-                            <button type="button" class="toggle-pw" onclick="togglePw('password', this)" aria-label="Hiện mật khẩu">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="input-wrap">
-                        <label class="form-label" for="confirmPassword">Xác nhận mật khẩu</label>
-                        <div class="input-field">
-                            <input class="form-control" id="confirmPassword" type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
-                            <i class="fa-solid fa-lock input-icon"></i>
-                            <button type="button" class="toggle-pw" onclick="togglePw('confirmPassword', this)" aria-label="Hiện mật khẩu">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="password">Mật khẩu</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-lock auth-input-icon"></i>
+                        <input type="password" id="password" name="password" class="form-control auth-input"
+                               placeholder="Nhập mật khẩu" autocomplete="new-password" required>
                     </div>
                 </div>
-                <button class="auth-submit" type="submit">
-                    <i class="fa-solid fa-check"></i> Đăng ký
-                </button>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="fullName">Họ và tên</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-card-text auth-input-icon"></i>
+                        <input type="text" id="fullName" name="fullName" class="form-control auth-input"
+                               placeholder="Nhập họ và tên" autocomplete="name" required>
+                    </div>
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="phone">Số điện thoại</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-telephone auth-input-icon"></i>
+                        <input type="text" id="phone" name="phone" class="form-control auth-input"
+                               placeholder="Nhập số điện thoại" autocomplete="tel" required>
+                    </div>
+                </div>
+
+                <div class="auth-field">
+                    <label class="auth-label" for="address">Địa chỉ</label>
+                    <div class="auth-input-wrap">
+                        <i class="bi bi-geo-alt auth-input-icon"></i>
+                        <input type="text" id="address" name="address" class="form-control auth-input"
+                               placeholder="Nhập địa chỉ liên hệ" autocomplete="street-address">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-gold w-100 py-2 mt-2 mb-3">Đăng ký</button>
             </form>
 
-            <p class="auth-footer">Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p>
+            <p class="text-center auth-footer-text mb-0">
+                Đã có tài khoản?
+                <a href="${ctx}/login" class="auth-link">Đăng nhập</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="auth-visual">
+        <div class="auth-visual-inner">
+            <img class="hero-art" src="https://images.unsplash.com/photo-1578301978693-895ea8a9a67f?w=600&h=500&fit=crop" alt="Đấu giá">
+            <p class="text-white-50 mt-3 small">Đăng ký miễn phí — tham gia đấu giá ngay hôm nay</p>
         </div>
     </div>
 </div>
 
-<script>
-function togglePw(id, btn) {
-    var input = document.getElementById(id);
-    var icon = btn.querySelector('i');
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.className = 'fa-solid fa-eye-slash';
-    } else {
-        input.type = 'password';
-        icon.className = 'fa-solid fa-eye';
-    }
-}
-</script>
+<jsp:include page="/WEB-INF/views/shared/footer.jsp"/>
 
-<%@ include file="../shared/footer.jsp" %>
